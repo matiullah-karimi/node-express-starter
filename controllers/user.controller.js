@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
+const { sendJsonResponse } = require('../utils/response.util');
 
 /**
  * Create a new user
@@ -28,5 +29,21 @@ module.exports.create = async (req, res) => {
     } catch (error) {
         console.error(error)
         sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });
+    }
+}
+
+/**
+ * Returns list of users
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
+module.exports.list = async (req, res) => {
+    try {
+        const users = await User.find({}).select('-password').lean();
+
+        sendJsonResponse(res, 200, users);
+    } catch (error) {
+        sendJsonResponse(res, 500, error);
     }
 }
