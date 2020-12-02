@@ -13,7 +13,7 @@ module.exports.create = async (req, res) => {
         let user = await User.findOne({ email: req.body.email });
     
         if (user) {
-            return sendResponse(res, 422, { status: 'err', message: 'Email has already taken' });
+            return sendJsonResponse(res, 422, { status: 'err', message: 'Email has already taken' });
         }
     
         user = new User(_.pick(req.body, ['name', 'email', 'password', 'phone']));
