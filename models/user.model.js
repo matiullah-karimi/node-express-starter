@@ -42,4 +42,16 @@ userSchema.methods.validPassword = function (password) {
   return validPassword == true;
 };
 
+userSchema.methods.isAdmin = function () {
+  return this.role == roles.ADMIN;
+}
+
+userSchema.methods.isDataEntry = function () {
+  return this.role == roles.DATA_ENTRY;
+}
+
+userSchema.methods.isReviewer = function () {
+  return this.role == roles.REVIEWER;
+}
+
 module.exports = mongoose.model('User', userSchema);
