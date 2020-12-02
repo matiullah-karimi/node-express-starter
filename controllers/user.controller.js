@@ -47,3 +47,26 @@ module.exports.list = async (req, res) => {
         sendJsonResponse(res, 500, error);
     }
 }
+
+/**
+ * Update a user
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
+module.exports.update = async (req, res) => {
+    try {
+        let user = await User.findById(req.params.id);
+    
+        if (! user) {
+            return sendJsonResponse(res, 404, { status: 'err', message: 'User not found' });
+        }
+        
+        await user.update(req.body);
+        
+        sendJsonResponse(res, 200, {...user.toObject(), ...req.body});
+    } catch (error) {
+        console.error(error)
+        sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });
+    }
+}

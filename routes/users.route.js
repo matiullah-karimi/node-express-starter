@@ -4,7 +4,11 @@ const userController = require('../controllers/user.controller');
 const userValidator = require('../middleware/validators/user.validator');
 
 /* GET users listing. */
-router.post('/', userValidator, userController.create);
-router.get('/', userController.list);
+router.route('/')
+    .post(userValidator, userController.create)
+    .get(userController.list);
+
+router.route('/:id')
+    .put(userValidator, userController.update);
 
 module.exports = router;
