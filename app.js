@@ -37,5 +37,6 @@ app.use(function(err, req, res, next) {
 });
 
 require('./database')();
+require('./lib/passport')();
 
 module.exports = app;
