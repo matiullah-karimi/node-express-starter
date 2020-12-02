@@ -48,6 +48,22 @@ module.exports.list = async (req, res) => {
 }
 
 /**
+ * Returns a single user
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
+module.exports.show = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).select('-password').lean();
+
+        sendJsonResponse(res, 200, user);
+    } catch (error) {
+        sendJsonResponse(res, 500, error);
+    }
+}
+
+/**
  * Update a user
  * 
  * @param {object} req 
@@ -67,5 +83,29 @@ module.exports.update = async (req, res) => {
     } catch (error) {
         console.error(error)
         sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });
+    }
+}
+
+/**
+ * Deletes a user
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
+module.exports.delete = async (req, res) => {
+    try {
+        if (req.params.id == req.user.id) {
+            sendJsonResponse(res, 400, {status: 'error', message: 'Cannot delete your own account'});
+        }
+
+        const user = await User.findById(req.params.id).select('-password');
+
+        if (user) {
+            await user.delete();
+        }
+
+        sendJsonResponse(res, 200, {status: 'success', message: 'User deleted successfully'});
+    } catch (error) {
+        sendJsonResponse(res, 500, error);
     }
 }
