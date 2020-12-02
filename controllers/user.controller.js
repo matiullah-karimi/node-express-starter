@@ -63,7 +63,7 @@ module.exports.update = async (req, res) => {
         
         await user.update(req.body);
         
-        sendJsonResponse(res, 200, {...user.toObject(), ...req.body});
+        sendJsonResponse(res, 200, {_id: user.id, ...req.body});
     } catch (error) {
         console.error(error)
         sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });
