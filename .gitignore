@@ -1,0 +1,88 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/tmp
+/public/__build__/
+/src/*/__build__/
+/__build__/**
+/public/dist/
+/public/assets/
+/src/*/dist/
+/dist/**
+/.awcache
+.webpack.json
+/compiled/
+dll/
+
+# dependencies
+/node_modules
+*/node_modules
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+**.js.map
+.settings/
+
+# IDE - VSCode
+.vscode/
+
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
+
+*.csv
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+*.xml
+!sitemap.xml
+.strong-pm
+coverage
+.env
+
+npm-debug*
+/admin/dist
+
+package-lock.json
+proxy.conf.json
+npm
+/.cache-loader/*
+stats.json
+
+/src/environments/.env.ts
+/src/environments/.env.js
+!/src/assets/js/admin-header.js
+!/src/assets/js/website-custom.js
+
+webpack-cache/
+web/
+
+/src/app/**/*.map
+/src/app/**/*.js
+/nginx/default.conf
+/nginx/default.conf.ssl
+/nginx/default-backend.conf
