@@ -10,6 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', loginController.login)
-router.use('/users', passport.authenticate('jwt'), userRouter);
+router.use('/users', passport.authenticate('jwt', { session: false }), userRouter);
 
 module.exports = router;
