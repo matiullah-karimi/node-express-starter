@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { roles } = require('../config/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -22,6 +23,11 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     required: false
+  },
+  role: {
+    required: true,
+    type: String,
+    enum: [...Object.values(roles)]
   }
 });
 

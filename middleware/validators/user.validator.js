@@ -1,12 +1,14 @@
 const Joi = require('joi');
 const { isValidObjectId } = require('mongoose');
+const { roles } = require('../../config/constants');
 const { toCustomValidationError } = require('../../utils/custom-validation-errors.util');
 const { sendJsonResponse } = require('../../utils/response.util');
 
 const putSchema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-    phone: Joi.number()
+    phone: Joi.number().required(),
+    role: Joi.string().valid(...Object.values(roles)).required()
 });
 
 const postSchema = putSchema.concat(Joi.object({

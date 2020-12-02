@@ -1,5 +1,4 @@
 const User = require('../models/user.model');
-const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { sendJsonResponse } = require('../utils/response.util');
 
@@ -17,7 +16,7 @@ module.exports.create = async (req, res) => {
             return sendJsonResponse(res, 422, { status: 'err', message: 'Email has already taken' });
         }
     
-        user = new User(_.pick(req.body, ['name', 'email', 'password', 'phone']));
+        user = new User(req.body);
     
         // hashing password
         const salt = await bcrypt.genSalt(10);
@@ -25,7 +24,7 @@ module.exports.create = async (req, res) => {
     
         await user.save();
     
-        sendJsonResponse(res, 200, _.pick(user, ['_id', 'name', 'email', 'phone']));
+        sendJsonResponse(res, 200, {...req.body, _id: user.id});
     } catch (error) {
         console.error(error)
         sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });
