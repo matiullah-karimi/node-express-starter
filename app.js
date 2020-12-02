@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
 
 require('dotenv').config();
 require('./database')();
-require('./lib/passport')();
+require('./config/passport')();
 require('./utils/response.util');
 
 module.exports = app;
