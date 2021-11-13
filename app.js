@@ -36,7 +36,7 @@ app.use(function(err, req, res, next) {
 });
 
 require('dotenv').config();
-require('./database')();
+require('./db/database')();
 require('./config/passport')();
 require('./utils/response.util');
 
