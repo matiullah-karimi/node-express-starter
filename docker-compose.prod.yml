@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  app:
+    image: residential_passport:${TAG}
+    container_name: app
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=production
+    tty: true
+    volumes:
+      - attachment-data:/usr/src/app/uploads
+    depends_on:
+      - mongodb
+    networks:
+      - front-tier
+      - back-tier
+  mongodb:
+    image: mongo:4.4.2
+    restart: always
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASS}
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - back-tier
+  web-app:
+    image: nginx:stable-alpine
+    container_name: web-app
+    tty: true
+    env_file:
+      - ./.env
+    environment:
+      - TZ=Asia/Kabul
+    depends_on:
+      - app
+    networks:
+      - front-tier
+    links:
+      - app
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  mongodb-data:
+  attachment-data:
+networks:
+  front-tier:
+  back-tier:

@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  expressjs:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: expressjs
+    env_file:
+      - ./.env
+    tty: true
+    ports:
+     - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - front-tier
+      - back-tier
+  mongodb:
+    image: mongo:4.4.2
+    restart: always
+    container_name: mongodb
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - 0.0.0.0:27017:27017
+    networks:
+      - back-tier
+volumes:
+  mongo_data:
+networks:
+  front-tier:
+  back-tier:

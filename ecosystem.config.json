@@ -1,0 +1,17 @@
+{
+  "apps" : [{
+    "name": "app",
+    "script": "./bin/www",
+    "instances": 1,
+    "autorestart": true,
+    "watch": false,
+    "args": [],
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "node_args": "",
+    "merge_logs": false,
+    "max_memory_restart": "2G",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}
