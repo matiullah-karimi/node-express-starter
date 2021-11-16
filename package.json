@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=node-express-starter:* nodemon --legacy-watch  --trace-warnings ./bin/www",
-    "seed": "node ./db/seeders/seeder.js"
+    "seed": "node ./db/seeders/seeder.js",
+    "test": "jest"
   },
   "dependencies": {
+    "@types/jest": "^27.0.2",
     "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
