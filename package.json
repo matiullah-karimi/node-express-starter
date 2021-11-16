@@ -24,7 +24,8 @@
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "multer": "^1.4.2"
   },
   "devDependencies": {
     "supertest": "^6.1.6"

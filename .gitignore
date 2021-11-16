@@ -85,3 +85,4 @@ web/
 /src/app/**/*.js
 /nginx/default.conf.ssl
 /nginx/default-backend.conf
+/uploads
