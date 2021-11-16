@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   app:
-    image: residential_passport:${TAG}
+    image: app:${TAG}
     container_name: app
     env_file:
       - ./.env
