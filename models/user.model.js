@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const { roles } = require('../config/constants');
+const { compare } = require('../utils/password.util');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,9 +37,7 @@ userSchema.methods.generateAuthToken = function () {
 }
 
 userSchema.methods.validPassword = function (password) {
-  const validPassword = bcrypt.compareSync(password, this.password);
-
-  return validPassword == true;
+  return compare(password, this.password);
 };
 
 userSchema.methods.isAdmin = function () {
