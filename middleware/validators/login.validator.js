@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         const { error } = schema.validate(req.body, { abortEarly: false });
 
         if (error) {
-            return sendJsonResponse(res, 200, toCustomValidationError(error));
+            return sendJsonResponse(res, 422, toCustomValidationError(error));
         }
 
         next();

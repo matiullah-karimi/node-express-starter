@@ -5,7 +5,7 @@
   "scripts": {
     "start": "DEBUG=node-express-starter:* nodemon --legacy-watch  --trace-warnings ./bin/www",
     "seed": "node ./db/seeders/seeder.js",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@types/jest": "^27.0.2",
@@ -25,5 +25,8 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "supertest": "^6.1.6"
   }
 }

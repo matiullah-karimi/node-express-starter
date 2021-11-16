@@ -16,8 +16,6 @@ module.exports.seed = async () => {
         email: 'admin@starter.com',
         phone: '09999999999',
         password: await hash(process.env.ADMIN_PASSWORD),
-        mobileUser: true,
-        active: true
     }).save();
 
     console.log('Admin user created successfully');
