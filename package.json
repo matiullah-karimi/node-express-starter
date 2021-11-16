@@ -1,9 +1,10 @@
 {
-  "name": "residential-passport-node",
+  "name": "node-express-starter",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=residential-passport-node:* nodemon --legacy-watch  --trace-warnings ./bin/www"
+    "start": "DEBUG=node-express-starter:* nodemon --legacy-watch  --trace-warnings ./bin/www",
+    "seed": "node ./db/seeders/seeder.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
