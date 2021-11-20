@@ -19,7 +19,7 @@ module.exports = function () {
 function setupLocalStrategy() {
     passport.use(new LocalStrategy({
         usernameField: 'email',
-        passwordField: 'password'
+        passwordField: 'password',
     },
         function (email, password, done) {
             User.findOne({ email: email }, function (err, user) {
@@ -43,8 +43,8 @@ function setupLocalStrategy() {
  */
 function setupJwtStrategy() {
     const options = {
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.JWT_SECRET
+        jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(), ExtractJwt.fromUrlQueryParameter('token')]),
+        secretOrKey: process.env.JWT_SECRET,
     }
 
     passport.use(new JwtStrategy(options, function (jwt_payload, done) {

@@ -1,5 +1,5 @@
 const User = require('../models/user.model');
-const bcrypt = require('bcrypt');
+const { hash } = require('../utils/password.util');
 const { sendJsonResponse } = require('../utils/response.util');
 
 /**
@@ -19,8 +19,7 @@ module.exports.create = async (req, res) => {
         user = new User(req.body);
     
         // hashing password
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password, salt);
+        user.password = await hash(user.password, salt);
     
         await user.save();
     
