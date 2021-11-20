@@ -19,11 +19,11 @@ module.exports.create = async (req, res) => {
         user = new User(req.body);
     
         // hashing password
-        user.password = await hash(user.password, salt);
+        user.password = await hash(user.password);
     
         await user.save();
     
-        sendJsonResponse(res, 200, {...req.body, _id: user.id});
+        sendJsonResponse(res, 200, user.toJson());
     } catch (error) {
         console.error(error)
         sendJsonResponse(res, 500, { status: 'err', message: 'Internal server error' });

@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     trim: true
   },
   phone: {
-    type: Number,
+    type: String,
     required: false
   },
   role: {
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({_id: this._id, name: this.name, email: this.email}, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: this._id, name: this.name, email: this.email }, process.env.JWT_SECRET);
   return token;
 }
 
@@ -50,6 +50,13 @@ userSchema.methods.isDataEntry = function () {
 
 userSchema.methods.isReviewer = function () {
   return this.role == roles.REVIEWER;
+}
+
+// Exclude password field from sending in response
+userSchema.methods.toJson = function () {
+  var obj = this.toObject(); //or var obj = this;
+  delete obj.password;
+  return obj;
 }
 
 module.exports = mongoose.model('User', userSchema);
