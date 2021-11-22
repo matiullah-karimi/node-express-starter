@@ -38,7 +38,7 @@ module.exports.create = async (req, res) => {
  */
 module.exports.list = async (req, res) => {
     try {
-        const users = await User.find({}).select('-password').lean();
+        const users = await User.paginate({_id: { $ne: req.user._id }}, { lean: true });
 
         sendJsonResponse(res, 200, users);
     } catch (error) {

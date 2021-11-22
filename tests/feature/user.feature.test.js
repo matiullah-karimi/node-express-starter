@@ -102,3 +102,22 @@ describe('POST /api/users', () => {
             expect(count).toBe(1);    
     });
 });
+
+describe('GET /api/users', () => {
+    it('should return a paginated list of users', async () => {
+        const users = await UserFactory.create({role: roles.ADMIN}, 12);
+        const adminUser = await UserFactory.create({role: roles.ADMIN});
+
+        await request(app).get("/api/users")
+        .set('Authorization', 'Bearer ' + adminUser.generateAuthToken())
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+            expect(response.body.docs.length).toBe(10);
+            expect(response.body.totalDocs).toBe(users.length);
+            expect(response.body.totalPages).toBe(2);
+            expect(response.body.page).toBe(1);
+        });
+    });
+});
+
