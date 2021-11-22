@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const { roles } = require('../config/constants');
 const { compare } = require('../utils/password.util');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,7 +19,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    select: false
   },
   phone: {
     type: String,
@@ -58,5 +60,8 @@ userSchema.methods.toJson = function () {
   delete obj.password;
   return obj;
 }
+
+// Adding pagination plugin
+userSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('User', userSchema);
