@@ -1,7 +1,7 @@
 module.exports.toCustomValidationError = (error) => {
-    const errors = [];
+    const errors = {};
 
-    error.details.forEach(err => errors.push({[err.context.key]: err.message}));
+    error.details.forEach(err => errors[err.context.key] = err.message);
 
     return errors;
 }
