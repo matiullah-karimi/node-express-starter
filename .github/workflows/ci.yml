@@ -25,6 +25,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    container:
+      image:  node:10.16-jessie
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        - 27017:27017
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,11 +42,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
-
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
-        with:
-          mongodb-version: 4.4
 
       - name: Install dependencies
         run: npm install
