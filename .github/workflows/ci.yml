@@ -40,5 +40,8 @@ jobs:
       - name: Install jest globally
         run: npm i -g jest
 
+      - name: Copy .env.example content to .env
+        run: cp .env.example .env
+
       - name: Run tests
         run: npm run test
