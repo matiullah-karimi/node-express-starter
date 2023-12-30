@@ -34,6 +34,11 @@ jobs:
         with:
           node-version: 14
 
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: 4.4
+
       - name: Install dependencies
         run: npm install
 
